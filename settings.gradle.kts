@@ -1,3 +1,1 @@
-
-rootProject.name = "decode_coding2"
-
+rootProject.name = "decode_coding"

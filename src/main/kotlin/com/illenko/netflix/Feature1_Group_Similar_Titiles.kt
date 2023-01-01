@@ -1,17 +1,12 @@
 package com.illenko.netflix // ktlint-disable filename
 
 internal object Solution {
-    fun groupTitles(strs: Array<String>): Map<String, MutableList<String>> {
-        val res = mutableMapOf<String, MutableList<String>>()
 
-        strs.forEach {
-            val key = calculateKey(it)
-            if (!res.contains(key)) res[key] = ArrayList()
-            res[key]!!.add(it)
-        }
-
-        return res
-    }
+    fun groupTitles(titles: Array<String>): Map<String, List<String>> =
+        titles.associateWith { calculateKey(it) }
+            .entries
+            .groupBy { it.value }
+            .mapValues { entry -> entry.value.map { it.key } }
 
     fun calculateKey(str: String): String =
         str.toList()
