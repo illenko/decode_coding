@@ -1,6 +1,6 @@
-package com.illenko.netflix // ktlint-disable filename
+package com.illenko.netflix.feature1 // ktlint-disable filename
 
-internal object Solution {
+object Solution {
 
     fun groupTitles(titles: Array<String>): Map<String, List<String>> =
         titles.associateWith { calculateKey(it) }
