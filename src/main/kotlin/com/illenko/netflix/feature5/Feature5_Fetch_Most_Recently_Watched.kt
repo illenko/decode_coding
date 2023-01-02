@@ -6,8 +6,8 @@ internal class LRUCache<T : Comparable<T>>(private var capacity: Int) {
     private var cacheValues: LinkedList<T> = LinkedList()
 
     fun get(key: T): Node<T>? {
-        return if (!cache.containsKey(key)) {
-            val value: T = cache[key]!!.value
+        return if (cache.containsKey(key)) {
+            val value = cache[key]!!.value
             cacheValues.remove(cache[key])
             cacheValues.append(key, value)
             cacheValues.tail
@@ -17,15 +17,8 @@ internal class LRUCache<T : Comparable<T>>(private var capacity: Int) {
     }
 
     fun set(key: T, value: T) {
-        if (!cache.containsKey(key)) {
-            evictIfNeeded()
-            cacheValues.append(key, value)
-            cache[key] = cacheValues.tail!!
-        } else {
-            cacheValues.remove(cache[key])
-            cacheValues.append(key, value)
-            cache[key] = cacheValues.tail!!
-        }
+        if (cache.containsKey(key)) cacheValues.remove(cache[key]) else evictIfNeeded()
+        cache[key] = cacheValues.append(key, value)
     }
 
     private fun evictIfNeeded() {

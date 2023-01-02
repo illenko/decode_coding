@@ -5,25 +5,9 @@ data class LinkedList<T : Comparable<T>>(
     var tail: Node<T>? = null,
     var size: Int = 0
 ) {
-
-    fun push(key: T, value: T): LinkedList<T> {
-        val newNode = Node(key = key, value = value, next = head)
-
-        if (head == null) {
-            head = newNode
-            tail = head
-        } else {
-            head!!.prev = newNode
-            head = newNode
-        }
-        size++
-        return this
-    }
-
-    fun append(key: T, value: T) {
+    fun append(key: T, value: T): Node<T> {
         if (isEmpty()) {
-            push(key, value)
-            return
+            return push(key, value)
         }
 
         val newNode = Node(key = key, value = value, next = null)
@@ -31,9 +15,10 @@ data class LinkedList<T : Comparable<T>>(
         tail!!.next = newNode
         newNode.prev = tail
         tail = newNode
-        newNode.next = null
 
         size++
+
+        return tail!!
     }
 
     fun remove(node: Node<T>?): Node<T>? {
@@ -56,22 +41,20 @@ data class LinkedList<T : Comparable<T>>(
         return node
     }
 
-    fun remove(value: T) {
-        var i = head
-        while (i != null) {
-            if (i.value == value) {
-                remove(i)
-            }
-            i = i.next
+    fun removeHead(): Node<T>? = remove(head)
+
+    private fun push(key: T, value: T): Node<T> {
+        val newNode = Node(key = key, value = value, next = head)
+
+        if (head == null) {
+            head = newNode
+            tail = head
+        } else {
+            head!!.prev = newNode
+            head = newNode
         }
-    }
-
-    fun removeHead(): Node<T>? {
-        return remove(head)
-    }
-
-    fun removeTail(): Node<T>? {
-        return remove(tail)
+        size++
+        return head!!
     }
 
     private fun isEmpty(): Boolean = size == 0

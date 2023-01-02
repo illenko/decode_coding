@@ -8,9 +8,9 @@ data class Node<T>(
 ) {
     override fun toString(): String {
         return if (next != null) {
-            "$key-$value -> $next"
+            "($key, $value) -> $next"
         } else {
-            "$key-$value"
+            "($key, $value)"
         }
     }
 }
