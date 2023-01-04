@@ -7,5 +7,11 @@ data class Node<T>(
     var next: Node<T>? = null,
     var prev: Node<T>? = null
 ) {
-    override fun toString(): String = "($key, $value, $freq)"
+    override fun toString(): String {
+        return if (next == null) {
+            "($key, $value, $freq)"
+        } else {
+            "($key, $value, $freq) -> $next"
+        }
+    }
 }

@@ -15,6 +15,7 @@ data class LinkedList<T : Comparable<T>>(
             node.prev = tail
         }
         tail = node
+        size++
     }
 
     fun remove(node: Node<T>?): Node<T>? {
