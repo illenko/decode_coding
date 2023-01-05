@@ -1,4 +1,4 @@
-package com.illenko.netflix.feature7
+package com.illenko.netflix.feature7 // ktlint-disable filename
 
 fun main() {
     val stack = Stack<Int>()
