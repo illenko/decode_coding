@@ -43,10 +43,9 @@ internal class LFUCache(private var capacity: Int) {
         }
         minFreq = 1
         keysMap[key] = Node(key = key, value = value, freq = minFreq)
-        if (!freqMap.containsKey(keysMap[key]!!.freq)) {
-            freqMap[keysMap[key]!!.freq] = LinkedList()
-        }
-        freqMap[keysMap[key]!!.freq]!!.append(keysMap[key]!!)
+
+        freqMap.computeIfAbsent(keysMap[key]!!.freq) { LinkedList() }.append(keysMap[key]!!)
+
         size++
     }
 
