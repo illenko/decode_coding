@@ -3,36 +3,18 @@ package com.illenko.netflix.feature11 // ktlint-disable filename
 import java.util.*
 
 internal object Solution {
-    fun generatePermutations(movies: List<String>): List<List<String>> {
-        val output = LinkedList<List<String>>()
-        val size = movies.size
+    fun generatePermutations(movies: List<String>): List<List<String>> =
+        backTrack(size = movies.size, movies = movies.toMutableList())
 
-        // convert movies into list since the output is a list of lists
-        val moviesList = mutableListOf<String>()
-        moviesList.addAll(movies)
-        backTrack(0, size, moviesList, output)
-        return output
-    }
-
-    private fun backTrack(first: Int, size: Int, moviesList: List<String>, output: MutableList<List<String>>) {
-        // If all strings of given array `moviesList` are used and
-        // and Backtracking is performed add the permutations to output array.
-        if (first == size) {
-            output.add(ArrayList(moviesList))
+    private fun backTrack(first: Int = 0, size: Int, movies: List<String>): List<List<String>> =
+        if (first == size) listOf(ArrayList(movies))
+        else {
+            (first until size).map { index ->
+                Collections.swap(movies, first, index)
+                backTrack(first + 1, size, movies)
+                    .also { Collections.swap(movies, first, index) }
+            }.flatten().toList()
         }
-
-        // Perform Backtracking for the size of a given array.
-        (first until size).forEach {
-            // Swap: In the current permutation place i-th integer first.
-            Collections.swap(moviesList, first, it)
-
-            // Complete permutations using the next integers.
-            backTrack(first + 1, size, moviesList, output)
-
-            // Swap
-            Collections.swap(moviesList, first, it)
-        }
-    }
 }
 
 fun main() {
