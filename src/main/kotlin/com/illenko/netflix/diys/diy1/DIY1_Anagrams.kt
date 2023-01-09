@@ -1,4 +1,4 @@
-package com.illenko.netflix.diy // ktlint-disable filename
+package com.illenko.netflix.diys.diy1 // ktlint-disable filename
 
 internal object Solution {
     fun groupAnagrams(strs: List<String>): List<List<String>> =
