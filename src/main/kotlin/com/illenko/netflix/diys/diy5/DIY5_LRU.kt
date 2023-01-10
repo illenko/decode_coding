@@ -1,7 +1,7 @@
 package com.illenko.netflix.diys.diy5 // ktlint-disable filename
 
 internal class LRUCache(private var capacity: Int) {
-    
+
     private var cache = HashMap<Int, LinkedListNode>(capacity)
     private var cacheValues = MyLinkedList()
 
