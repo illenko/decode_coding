@@ -2,7 +2,7 @@ package com.illenko.netflix.diys.diy9 // ktlint-disable filename
 
 internal object Solution {
     fun letterCombinations(digits: String): List<String> =
-        if (digits.isEmpty() || digits.contains('1')) listOf()
+        if (digits.isEmpty() || digits.contains('1') || digits.length > 4) listOf()
         else backTrack(
             0,
             mutableListOf(),
@@ -26,7 +26,7 @@ internal object Solution {
         values: Map<Char, String>
     ): List<String> =
         if (path.size == chars.size) {
-            path
+            listOf(path.joinToString(""))
         } else {
             val combinations = mutableListOf<String>()
             values[chars[index]]?.let { value ->
